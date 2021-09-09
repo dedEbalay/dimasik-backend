@@ -12,7 +12,7 @@ const User = sequelize.define('USER', {
 const News = sequelize.define('NEWS', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
-    text: {type: DataTypes.STRING, allowNull: false},
+    text: {type: DataTypes.TEXT, allowNull: false},
     imgUrl: {type: DataTypes.STRING, unique: true}
 })
 

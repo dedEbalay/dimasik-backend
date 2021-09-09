@@ -3,15 +3,22 @@ const express = require('express'),
       sequelize = require('./db.js'),
       models = require('./models/models.js'),
       cors = require('cors'),
-      router = require('./routes/index.js')
+      router = require('./routes/index.js'),
+      errorMiddleware = require('./middleware/ErrorMiddleware'),
+      fileupload = require('express-fileupload'),
+      path = require('path');
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+
 app.use(cors());
 app.use(express.json());
-app.use('/api', router)
+app.use(express.static(path.resolve(__dirname, 'static', 'img')))
+app.use(fileupload({}));
+app.use('/api', router);
+app.use(errorMiddleware);
 
 app.get('/', (req, res) => {
     res.status(200).json({message:'Hello hell!'})
